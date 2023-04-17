@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+    <title>Auto CSV Generator</title>
+  </head>
+
+  <body>
+    <header>
+      <div>
+        Generate every possible combination of variations from your product attributes, for Woocommerce!
+      </div>
+    </header>
+
+    <main>
+      <form action="">
+        <div class="product-name">
+          <input type="text" name="productName" id="product-name" placeholder="Enter product name">
+        </div>
+        <fieldset>
+          <legend>Add attributes!</legend>
+          <div id="addAttributeInput">
+            <input type="text" name="attributeName" id="attribute-name" 
+                  placeholder="Enter attribute name" required>
+            <input type="text" name="attributeItems" id="attribute-items"
+                  placeholder="Enter attribute items. Separate them with comma (,)" required>
+          </div>
+          <button type="button" onclick="saveNewAttribute()">Add new attribute</button>
+        </fieldset>
+
+        <div class="btns-container">
+          <!-- <button type="submit" onclick="saveNewAttribute()">Download product variations (.CSV)</button> -->
+        </div>
+      </form>
+
+      <div class="table-container">
+        <h3>Product Attributes!</h3>
+        <table>
+          <tr>
+            <th>Attributes</th>
+            <th>Attribute Name</th>
+            <th>Attribute Values</th>
+          </tr>
+          <tr>
+            <th></th>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    </main>
+  </body>
+
+</html>
