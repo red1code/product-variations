@@ -30,28 +30,17 @@
             <input type="text" name="attributeItems" id="attribute-items"
                   placeholder="Enter attribute items. Separate them with comma (,)" required>
           </div>
-          <button type="button" onclick="saveNewAttribute()">Add new attribute</button>
+          <button type="submit" onclick="saveNewAttribute()">Add new attribute</button>
         </fieldset>
 
         <div class="btns-container">
-          <!-- <button type="submit" onclick="saveNewAttribute()">Download product variations (.CSV)</button> -->
+          <button type="button" onclick="getVariations()">Download product variations (.CSV)</button>
         </div>
       </form>
 
       <div class="table-container">
-        <h3>Product Attributes!</h3>
-        <table>
-          <tr>
-            <th>Attributes</th>
-            <th>Attribute Name</th>
-            <th>Attribute Values</th>
-          </tr>
-          <tr>
-            <th></th>
-            <td></td>
-            <td></td>
-          </tr>
-        </table>
+        <h3 id="table-title"></h3>
+        <table id="table"></table>
       </div>
     </main>
   </body>

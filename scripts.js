@@ -1,14 +1,24 @@
 const form = document.querySelector('form');
+const productName = document.getElementById('product-name');
+const tableTitle = document.getElementById('table-title');
+const table = document.getElementById('table');
+
+
+productName.addEventListener('keyup', evt => {
+  tableTitle.textContent = `${productName.value} Attributes`;
+});
+
 
 const App = (() => {
   let _Attributes = [];
   const getAttributes = () => _Attributes;
   const saveNewAttribute = (attrInputName, attrInputValues) => {
-    _Attributes.push({
+    const newAttribute = {
       attributeName: getInputValue(attrInputName),
-      attributeValues: getInputValue(attrInputValues)
-    });
-    console.warn(_Attributes);
+      attributeValues: strToArray(getInputValue(attrInputValues))
+    };
+    _Attributes.push(newAttribute);
+    renderTable();
     clearInput('attribute-name');
     clearInput('attribute-items');
   }
@@ -16,17 +26,77 @@ const App = (() => {
 })();
 
 
-function getInputValue(inputName) {
-  return form.elements.namedItem(inputName).value;
+function renderTable() {
+  table.innerHTML = `
+    <tr>
+      <th>Attributes</th>
+      <th>Attribute Name</th>
+      <th>Attribute Values</th>
+    </tr>`;
+  let i = 1;
+  App.getAttributes().map(attr => {
+    table.innerHTML += `
+      <tr>
+        <th>Attribute ${i}</th>
+        <td>${attr.attributeName}</td>
+        <td>${attr.attributeValues}</td>
+      </tr>`;
+    i++
+  })
 }
+
 
 function saveNewAttribute() {
   App.saveNewAttribute('attributeName', 'attributeItems')
 }
 
+
+function getVariations() {
+  const variations = generateVariations(App.getAttributes());
+  console.log(variations);
+}
+
+
+function getInputValue(inputName) {
+  return form.elements.namedItem(inputName).value;
+}
+
+
 function clearInput(inputID) {
   document.getElementById(inputID).value = '';
 }
+
+
+function strToArray(str) {
+  return str.split(",").map(val => val.trim());
+}
+
+
+// Function to generate all possible variations from attributes
+function generateVariations(attributes) {
+  const keys = attributes.map((attr) => attr.attributeName);
+  const values = attributes.map((attr) => attr.attributeValues);
+
+  const cartesianProduct = (...arrays) =>
+    arrays.reduce((acc, arr) =>
+      acc.flatMap((x) =>
+        arr.map((y) =>
+          [...x, y])), [[]]);
+
+  const variations = cartesianProduct(...values).map((productVariation) =>
+    keys.reduce(
+      (acc, key, i) => ({
+        ...acc,
+        [key]: productVariation[i]
+      }),
+      {}
+    )
+  );
+
+  return variations;
+}
+
+
 
 
 
