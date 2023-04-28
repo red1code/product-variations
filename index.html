@@ -7,42 +7,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
-    <title>Auto CSV Generator</title>
+    <title>Woocommerce Products Variations Generator</title>
   </head>
 
   <body>
     <header>
       <div>
-        Generate every possible combination of variations from your product attributes, for Woocommerce!
+        <h1>Woocommerce Products Variations Generator!</h1>
+        <small>
+          Generate every possible variations from the values of a product attributes, and export them to a (.CSV) file, for Wordpress Woocommerce plugin.
+        </small>
       </div>
     </header>
 
     <main>
       <form action="">
-        <div class="product-name">
-          <input type="text" name="productName" id="product-name" placeholder="Enter product name">
-        </div>
-        <fieldset>
-          <legend>Add attributes!</legend>
-          <div id="addAttributeInput">
-            <input type="text" name="attributeName" id="attribute-name" 
-                  placeholder="Enter attribute name" required>
-            <input type="text" name="attributeItems" id="attribute-items"
-                  placeholder="Enter attribute items. Separate them with comma (,)" required>
-          </div>
-          <button type="submit" onclick="saveNewAttribute()">Add new attribute</button>
-        </fieldset>
-
-        <div class="btns-container">
-          <button type="button" onclick="getVariations()">Download product variations (.CSV)</button>
+        <div class="upload-container">
+          <input type="file" id="csv-file-input" accept=".csv" placeholder="Upload a CSV file">
         </div>
       </form>
-
-      <div class="table-container">
-        <h3 id="table-title"></h3>
-        <table id="table"></table>
-      </div>
     </main>
+
+    <footer>
+      <div class="footer-text">
+        Made with <span class="love-emoji">♥</span> by
+        <strong>
+          <a rel="noopener" class="red1dev-link" target="_blank" 
+            href="https://github.com/red1code/product-variations">
+            Red1Dev
+          </a>
+        </strong>
+        <span id="year-holder"></span>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year-holder').textContent = new Date().getFullYear();
+    </script>
   </body>
 
 </html>
