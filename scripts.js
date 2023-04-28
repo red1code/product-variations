@@ -1,7 +1,6 @@
 const csvFileInput = document.getElementById('csv-file-input');
 
 
-let csvData = [];
 let variationsRowsContainer = [
   ['ID', 'Type', 'SKU', 'Name', 'Published', 'Is featured?', 'Visibility in catalog', 'Short description', 'Description', 'Date sale price starts', 'Date sale price ends', 'Tax status', 'Tax class', 'In stock?', 'Stock', 'Low stock amount', 'Backorders allowed?', 'Sold individually?', 'Weight (kg)', 'Length (cm)', 'Width (cm)', 'Height (cm)', 'Allow customer reviews?', 'Purchase note', 'Sale price', 'Regular price', 'Categories', 'Tags', 'Shipping class', 'Images', 'Download limit', 'Download expiry days', 'Parent', 'Grouped products', 'Upsells', 'Cross-sells', 'External URL', 'Button text', 'Position', 'Attribute 1 name', 'Attribute 1 value(s)', 'Attribute 1 visible', 'Attribute 1 global']
 ];
@@ -12,7 +11,7 @@ csvFileInput.addEventListener('change', (event) => {
   const reader = new FileReader();
   reader.onload = (event) => {
     const fileData = event.target.result;
-    csvData = readCsvData(fileData);
+    const csvData = readCsvData(fileData);
     for (let i = 0; i < csvData.length - 1; i++) {
       const attrs = getAttributesFromRow(csvData[i]);
       const productVariations = generateVariations(attrs);
@@ -128,7 +127,7 @@ helper functions
 
 
 function generateParentRow(attributes) {
-  const parentRow = ['replace with ID', 'variation', '', 'replace with product name', '1', '0', 'visible', 'replace with short description', '', '', '', 'taxable', '', '1', '', '', '0', '0', '', '', '', '', '1', '', '', '', 'replace with Category', '', '', 'replace with image', '', '', '', '', '', '', '', '', 'replace with position'];
+  let parentRow = ['replace with ID', 'variation', '', 'replace with product name', '1', '0', 'visible', 'replace with short description', '', '', '', 'taxable', '', '1', '', '', '0', '0', '', '', '', '', '1', '', '', '', 'replace with Category', '', '', 'replace with image', '', '', '', '', '', '', '', '', 'replace with position'];
   const newCols = attributes.map(attr => [
     attr.attributeName,
     `"${attr.attributeValues.toString()}"`,
