@@ -2,7 +2,19 @@ const csvFileInput = document.getElementById('csv-file-input');
 
 
 let variationsRowsContainer = [
-  ['ID', 'Type', 'SKU', 'Name', 'Published', 'Is featured?', 'Visibility in catalog', 'Short description', 'Description', 'Date sale price starts', 'Date sale price ends', 'Tax status', 'Tax class', 'In stock?', 'Stock', 'Low stock amount', 'Backorders allowed?', 'Sold individually?', 'Weight (kg)', 'Length (cm)', 'Width (cm)', 'Height (cm)', 'Allow customer reviews?', 'Purchase note', 'Sale price', 'Regular price', 'Categories', 'Tags', 'Shipping class', 'Images', 'Download limit', 'Download expiry days', 'Parent', 'Grouped products', 'Upsells', 'Cross-sells', 'External URL', 'Button text', 'Position', 'Attribute 1 name', 'Attribute 1 value(s)', 'Attribute 1 visible', 'Attribute 1 global']
+  [
+    'ID', 'Type', 'SKU', 'Name', 'Published', 'Is featured?', 'Visibility in catalog', 'Short description',
+    'Description', 'Date sale price starts', 'Date sale price ends', 'Tax status', 'Tax class', 'In stock?',
+    'Stock', 'Low stock amount', 'Backorders allowed?', 'Sold individually?', 'Weight (kg)', 'Length (cm)',
+    'Width (cm)', 'Height (cm)', 'Allow customer reviews?', 'Purchase note', 'Sale price', 'Regular price',
+    'Categories', 'Tags', 'Shipping class', 'Images', 'Download limit', 'Download expiry days', 'Parent',
+    'Grouped products', 'Upsells', 'Cross-sells', 'External URL', 'Button text', 'Position',
+    'Attribute 1 name', 'Attribute 1 value(s)', 'Attribute 1 visible', 'Attribute 1 global',
+    'Attribute 2 name', 'Attribute 2 value(s)', 'Attribute 2 visible', 'Attribute 2 global',
+    'Attribute 3 name', 'Attribute 3 value(s)', 'Attribute 3 visible', 'Attribute 3 global',
+    'Attribute 4 name', 'Attribute 4 value(s)', 'Attribute 4 visible', 'Attribute 4 global',
+    'Attribute 5 name', 'Attribute 5 value(s)', 'Attribute 5 visible', 'Attribute 5 global'
+  ]
 ];
 
 
@@ -13,9 +25,10 @@ csvFileInput.addEventListener('change', (event) => {
     const fileData = event.target.result;
     const csvData = readCsvData(fileData);
     for (let i = 0; i < csvData.length - 1; i++) {
+      console.warn(csvData[i]);
       const attrs = getAttributesFromRow(csvData[i]);
       const productVariations = generateVariations(attrs);
-      const csvRows = variationsToRows(productVariations, attrs);
+      const csvRows = variationsToRows(productVariations, attrs, csvData[i]);
       csvRows.map(row => {
         variationsRowsContainer.push(row);
       })
@@ -92,16 +105,22 @@ function generateVariations(attributes) {
 }
 
 
-function variationsToRows(variations, attributes) {
+function variationsToRows(variations, attributes, parentData) {
   let variationsRows = [];
+  let i = 1;
   variations.map(variation => {
-    let row = ['', 'variation', '', 'replace with product name', '1', '0', 'visible', '', '', '', '', 'taxable', 'parent', '1', '', '', '0', '0', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
+    let row = [
+      `${parentData['SKU']}-${i}`, 'variation', '', `${parentData['Name']}`, '1', '0', 'visible', '', '',
+      '', '', 'taxable', 'parent', '1', '', '', '0', '0', '', '', '', '', '0', '', '', '98000', '', '', '',
+      `${parentData['ImageLink']}`, '', '', `id:${parentData['SKU']}`, '', '', '', '', '', ''
+    ];
     for (const [key, value] of Object.entries(variation)) {
       row = row.concat([key, value, '', '1']);
     }
     variationsRows.push(row);
+    i++;
   });
-  variationsRows.unshift(generateParentRow(attributes));
+  variationsRows.unshift(generateParentRow(attributes, parentData));
   return variationsRows;
 }
 
@@ -126,11 +145,16 @@ helper functions
 */
 
 
-function generateParentRow(attributes) {
-  let parentRow = ['replace with ID', 'variation', '', 'replace with product name', '1', '0', 'visible', 'replace with short description', '', '', '', 'taxable', '', '1', '', '', '0', '0', '', '', '', '', '1', '', '', '', 'replace with Category', '', '', 'replace with image', '', '', '', '', '', '', '', '', 'replace with position'];
+function generateParentRow(attributes, rowData) {
+  let parentRow = [
+    `${rowData['SKU']}`, 'variable', '', `${rowData['Name']}`, '1', '0', 'visible',
+    `${rowData['Short description']}`, `${rowData['Description']}`, '', '', 'taxable', '', '1', '', '',
+    '0', '0', '', '', '', '', '1', '', '', '', `${rowData['Categories']}`, '', '', `${rowData['ImageLink']}`,
+    '', '', '', '', '', '', '', '', ''
+  ];
   const newCols = attributes.map(attr => [
     attr.attributeName,
-    `"${attr.attributeValues.toString()}"`,
+    `"${arrayToString(attr.attributeValues)}"`,
     '1',
     '1'
   ]);
@@ -140,4 +164,17 @@ function generateParentRow(attributes) {
 
 function stringToArray(str) {
   return str?.split('-').map(val => val.trim());
+}
+
+
+function arrayToString(arr) {
+  let str = '';
+  arr.map(item => {
+    if (arr.indexOf(item) === 0) {
+      str = item;
+      return;
+    }
+    str += ', ' + item;
+  });
+  return str;
 }
