@@ -6,6 +6,7 @@
 
 body {
   min-height: 100vh;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
 }
@@ -20,7 +21,10 @@ footer {
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 5px 0 #ccc;
+}
 
+header {
+  top: 0;
 }
 
 header>div {
