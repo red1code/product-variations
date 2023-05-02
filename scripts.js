@@ -17,6 +17,11 @@ let variationsRowsContainer = [
   ]
 ];
 
+// variationsRowsContainer.map(item => {
+//   let indx = item.indexOf('Position');
+//   console.warn('position index: ' + indx)
+// })
+
 
 csvFileInput.addEventListener('change', (event) => {
   const file = event.target.files[0];
@@ -25,7 +30,6 @@ csvFileInput.addEventListener('change', (event) => {
     const fileData = event.target.result;
     const csvData = readCsvData(fileData);
     for (let i = 0; i < csvData.length - 1; i++) {
-      console.warn(csvData[i]);
       const attrs = getAttributesFromRow(csvData[i]);
       const productVariations = generateVariations(attrs);
       const csvRows = variationsToRows(productVariations, attrs, csvData[i]);
@@ -33,7 +37,13 @@ csvFileInput.addEventListener('change', (event) => {
         variationsRowsContainer.push(row);
       })
     }
-    generateCsv(variationsRowsContainer);
+    let position = 1;
+    variationsRowsContainer.map(row => {
+      if (variationsRowsContainer.indexOf(row) > 0) {
+        row[38] = position;
+        position++;
+      }
+    })
   };
   reader.readAsText(file);
 });
@@ -110,9 +120,10 @@ function variationsToRows(variations, attributes, parentData) {
   let i = 1;
   variations.map(variation => {
     let row = [
-      `${parentData['SKU']}-${i}`, 'variation', '', `${parentData['Name']}`, '1', '0', 'visible', '', '',
-      '', '', 'taxable', 'parent', '1', '', '', '0', '0', '', '', '', '', '0', '', '', '98000', '', '', '',
-      `${parentData['ImageLink']}`, '', '', `id:${parentData['SKU']}`, '', '', '', '', '', ''
+      `${parentData['SKU']}-${i}`, 'variation', `${parentData['SKU']}-${i}`, `${parentData['Name']}`,
+      '1', '0', 'visible', `${parentData['Short description']}`, `${parentData['Description']}`, '', '',
+      'taxable', 'parent', '1', '', '', '0', '0', '', '', '', '', '0', '', '', `${parentData['Price']}`,
+      '', '', '', `${parentData['ImageLink']}`, '', '', `id:${parentData['SKU']}`, '', '', '', '', '', ''
     ];
     for (const [key, value] of Object.entries(variation)) {
       row = row.concat([key, value, '', '1']);
@@ -122,6 +133,23 @@ function variationsToRows(variations, attributes, parentData) {
   });
   variationsRows.unshift(generateParentRow(attributes, parentData));
   return variationsRows;
+}
+
+
+function generateParentRow(attributes, rowData) {
+  let parentRow = [
+    `${rowData['SKU']}`, 'variable', `${rowData['SKU']}`, `${rowData['Name']}`, '1', '0', 'visible',
+    `${rowData['Short description']}`, `${rowData['Description']}`, '', '', 'taxable', '', '1', '', '',
+    '0', '0', '', '', '', '', '1', '', '', '', `${rowData['Categories']}`, '', '', `${rowData['ImageLink']}`,
+    '', '', '', '', '', '', '', '', ''
+  ];
+  const newCols = attributes.map(attr => [
+    attr.attributeName,
+    `"${arrayToString(attr.attributeValues)}"`,
+    '1',
+    '1'
+  ]);
+  return parentRow.concat(newCols).flat();
 }
 
 
@@ -139,27 +167,14 @@ function generateCsv(csvRows) {
   URL.revokeObjectURL(url);
 }
 
+function downloadVariations() {
+  generateCsv(variationsRowsContainer);
+}
+
 
 /*
 helper functions
 */
-
-
-function generateParentRow(attributes, rowData) {
-  let parentRow = [
-    `${rowData['SKU']}`, 'variable', '', `${rowData['Name']}`, '1', '0', 'visible',
-    `${rowData['Short description']}`, `${rowData['Description']}`, '', '', 'taxable', '', '1', '', '',
-    '0', '0', '', '', '', '', '1', '', '', '', `${rowData['Categories']}`, '', '', `${rowData['ImageLink']}`,
-    '', '', '', '', '', '', '', '', ''
-  ];
-  const newCols = attributes.map(attr => [
-    attr.attributeName,
-    `"${arrayToString(attr.attributeValues)}"`,
-    '1',
-    '1'
-  ]);
-  return parentRow.concat(newCols).flat();
-}
 
 
 function stringToArray(str) {

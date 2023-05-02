@@ -22,11 +22,15 @@
     </header>
 
     <main>
-      <form action="">
+      <form onsubmit="downloadVariations()">
         <div class="upload-container">
-          <label for="">Upload a CSV file: </label>
+          <label for="">Upload a CSV file: </label> <br><br>
           <input type="file" id="csv-file-input" accept=".csv" name="csv-input" 
-                placeholder="Upload a CSV file">
+                placeholder="Upload a CSV file" required>
+        </div>
+        <div class="btns">
+          <button type="submit" id="downloadBtn">Download Variations</button>
+          <button type="button" class="reset" onClick="window.location.reload()">Reset</button>
         </div>
       </form>
     </main>
@@ -35,7 +39,7 @@
       <div class="footer-text">
         Made with <span class="love-emoji">♥</span> by
         <strong>
-          <a rel="noopener" class="red1dev-link" target="_blank" title="Go to Github repository"
+          <a rel="noopener" class="red1dev-link" target="_blank" title="View the source code on Github"
             href="https://github.com/red1code/product-variations">
             Red1Dev
           </a>

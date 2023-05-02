@@ -6,7 +6,7 @@
 
 body {
   min-height: 100vh;
-  min-width: 300px;
+  min-width: 350px;
   display: flex;
   flex-direction: column;
 }
@@ -39,6 +39,8 @@ main {
 form {
   padding: 16px;
   background-color: aliceblue;
+  max-width: 750px;
+  margin-inline: auto;
   border-radius: 5px;
   box-shadow: 0 0 5px 0;
 }
@@ -66,20 +68,15 @@ a.red1dev-link:hover {
   transition: .3s;
 }
 
-/* 
-input {
-  width: 100%;
-  padding: 10px 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.btns {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
 }
 
 button {
-  flex: 1;
-  font-size: 1rem;
+  font-size: .9rem;
   font-weight: bold;
-  color: #fff;
-  background-color: darkgoldenrod;
   border: none;
   padding: 11px 15px;
   border-radius: 5px;
@@ -89,5 +86,24 @@ button {
 button:hover {
   filter: brightness(1.2);
   transition: .3s;
-} 
+}
+
+button#downloadBtn {
+  flex: 1;
+  background-color: green;
+  color: #fff;
+}
+
+button.reset {
+  background-color: orangered;
+  color: #fff;
+}
+
+/* 
+input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 */
