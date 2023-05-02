@@ -1,6 +1,7 @@
 const csvFileInput = document.getElementById('csv-file-input');
 
 
+let ID = 1;
 let variationsRowsContainer = [
   [
     'ID', 'Type', 'SKU', 'Name', 'Published', 'Is featured?', 'Visibility in catalog', 'Short description',
@@ -18,8 +19,8 @@ let variationsRowsContainer = [
 ];
 
 // variationsRowsContainer.map(item => {
-//   let indx = item.indexOf('Position');
-//   console.warn('position index: ' + indx)
+//   let indx = item.indexOf('Parent');
+//   console.warn('The index of "Parent" is: ' + indx)
 // })
 
 
@@ -27,6 +28,7 @@ csvFileInput.addEventListener('change', (event) => {
   const file = event.target.files[0];
   const reader = new FileReader();
   reader.onload = (event) => {
+    let id = 1;
     const fileData = event.target.result;
     const csvData = readCsvData(fileData);
     for (let i = 0; i < csvData.length; i++) {
@@ -40,6 +42,8 @@ csvFileInput.addEventListener('change', (event) => {
     let position = 1;
     variationsRowsContainer.map(row => {
       if (variationsRowsContainer.indexOf(row) > 0) {
+        row[14] = '50';
+        row[16] = '-1';
         row[38] = position;
         position++;
       }
@@ -120,12 +124,12 @@ function variationsToRows(variations, attributes, parentData) {
   let i = 1;
   variations.map(variation => {
     let row = [
-      `${parentData['SKU']}-${i}`, 'variation', `${parentData['SKU']}-${i}`, `${parentData['Name']}`,
+      '', 'variation', `${parentData['SKU']}-${i}`, `${parentData['Name']}`,
       '1', '0', 'visible', `${parentData['Short description']}`, `${parentData['Description']}`, '', '',
       'taxable', 'parent', '1', '', '', '0', '0', '', '', '', '', '0', '', '', `${parentData['Price']}`,
       '', '', '',
       getImgLink(parentData['ImageLink'], variation.Color),
-      '', '', `id:${parentData['SKU']}`, '', '', '', '', '', ''
+      '', '', '', '', '', '', '', '', ''
     ];
     for (const [key, value] of Object.entries(variation)) {
       row = row.concat([key, value, '', '1']);
@@ -134,6 +138,13 @@ function variationsToRows(variations, attributes, parentData) {
     i++;
   });
   variationsRows.unshift(generateParentRow(attributes, parentData));
+  variationsRows.map(row => {
+    row[0] = ID;
+    ID++;
+    if (variationsRows.indexOf(row) > 0) {
+      row[32] = `id:${variationsRows[0][0]}`;
+    }
+  });
   return variationsRows;
 }
 
@@ -197,5 +208,5 @@ function arrayToString(arr) {
 }
 
 function getImgLink(link, color) {
-  return link.replace('.jpg', `-${color}`);
+  return link.replace('.jpg', `-${color}.jpg`);
 }
