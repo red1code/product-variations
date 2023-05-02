@@ -29,7 +29,7 @@ csvFileInput.addEventListener('change', (event) => {
   reader.onload = (event) => {
     const fileData = event.target.result;
     const csvData = readCsvData(fileData);
-    for (let i = 0; i < csvData.length - 1; i++) {
+    for (let i = 0; i < csvData.length; i++) {
       const attrs = getAttributesFromRow(csvData[i]);
       const productVariations = generateVariations(attrs);
       const csvRows = variationsToRows(productVariations, attrs, csvData[i]);
@@ -123,7 +123,9 @@ function variationsToRows(variations, attributes, parentData) {
       `${parentData['SKU']}-${i}`, 'variation', `${parentData['SKU']}-${i}`, `${parentData['Name']}`,
       '1', '0', 'visible', `${parentData['Short description']}`, `${parentData['Description']}`, '', '',
       'taxable', 'parent', '1', '', '', '0', '0', '', '', '', '', '0', '', '', `${parentData['Price']}`,
-      '', '', '', `${parentData['ImageLink']}`, '', '', `id:${parentData['SKU']}`, '', '', '', '', '', ''
+      '', '', '',
+      getImgLink(parentData['ImageLink'], variation.Color),
+      '', '', `id:${parentData['SKU']}`, '', '', '', '', '', ''
     ];
     for (const [key, value] of Object.entries(variation)) {
       row = row.concat([key, value, '', '1']);
@@ -192,4 +194,8 @@ function arrayToString(arr) {
     str += ', ' + item;
   });
   return str;
+}
+
+function getImgLink(link, color) {
+  return link.replace('.jpg', `-${color}`);
 }
