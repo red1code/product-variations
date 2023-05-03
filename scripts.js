@@ -28,7 +28,6 @@ csvFileInput.addEventListener('change', (event) => {
   const file = event.target.files[0];
   const reader = new FileReader();
   reader.onload = (event) => {
-    let id = 1;
     const fileData = event.target.result;
     const csvData = readCsvData(fileData);
     for (let i = 0; i < csvData.length; i++) {
@@ -39,15 +38,6 @@ csvFileInput.addEventListener('change', (event) => {
         variationsRowsContainer.push(row);
       })
     }
-    let position = 1;
-    variationsRowsContainer.map(row => {
-      if (variationsRowsContainer.indexOf(row) > 0) {
-        row[14] = '50';
-        row[16] = '-1';
-        row[38] = position;
-        position++;
-      }
-    })
   };
   reader.readAsText(file);
 });
@@ -140,9 +130,11 @@ function variationsToRows(variations, attributes, parentData) {
   variationsRows.unshift(generateParentRow(attributes, parentData));
   variationsRows.map(row => {
     row[0] = ID;
+    row[38] = ID;
+    row[16] = '1';
     ID++;
     if (variationsRows.indexOf(row) > 0) {
-      row[32] = `id:${variationsRows[0][0]}`;
+      row[32] = variationsRows[0][2];
     }
   });
   return variationsRows;
@@ -180,6 +172,7 @@ function generateCsv(csvRows) {
   URL.revokeObjectURL(url);
 }
 
+
 function downloadVariations() {
   generateCsv(variationsRowsContainer);
 }
@@ -206,6 +199,7 @@ function arrayToString(arr) {
   });
   return str;
 }
+
 
 function getImgLink(link, color) {
   return link.replace('.jpg', `-${color}.jpg`);
