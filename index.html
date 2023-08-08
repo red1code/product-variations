@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="scripts.js" defer></script>
     <title>Woocommerce Products Variations Generator</title>
   </head>
@@ -20,22 +19,39 @@
 
     <main>
       <div class="intro">
-        Upload a CSV file containing 
-        <a href="https://woocommerce.com/" target="_blank">Woocommerce</a> 
-        products variables, and the app will generate every possible compbinations of variations from the attributes values, and put them in a final CSV file, and then you can download it. <br><br>
-        The input CSV file must be in a specific structure. Download the input sample from  
-        <strong><a href="./assets/variables-input-sample.csv">here</a></strong> (it contains 2 products as variables examples)
+        Upload a CSV file containing
+        <a href="https://woocommerce.com/" target="_blank">Woocommerce</a>
+        products variables, and the app will generate every possible
+        compbinations of variations from the attributes values, and put them in
+        a final CSV file, and then you can download it. <br /><br />
+        The input CSV file must be in a specific structure. Download sample
+        <strong>
+          <a href="./assets/variables-input-sample.csv">here</a>
+        </strong>
+        (it contains 2 products as variables examples)
       </div>
 
       <form onsubmit="downloadVariations()">
         <div class="upload-container">
-          <label for="csv-input">Upload a CSV file: </label> <br><br>
-          <input type="file" id="csv-file-input" accept=".csv" name="csv-input" 
-                placeholder="Upload a CSV file" required>
+          <label for="csv-input">Upload a CSV file: </label> <br /><br />
+          <input
+            type="file"
+            id="csv-file-input"
+            accept=".csv"
+            name="csv-input"
+            placeholder="Upload a CSV file"
+            required
+          />
         </div>
         <div class="btns">
           <button type="submit" id="downloadBtn">Download Variations</button>
-          <button type="button" class="reset" onClick="window.location.reload()">Reset</button>
+          <button
+            type="button"
+            class="reset"
+            onClick="window.location.reload()"
+          >
+            Reset
+          </button>
         </div>
       </form>
     </main>
@@ -44,8 +60,13 @@
       <div class="footer-text">
         Made with <span class="love-emoji">♥</span> by
         <strong>
-          <a rel="noopener" class="red1dev-link" target="_blank" title="View the source code on Github"
-            href="https://github.com/red1code/product-variations">
+          <a
+            rel="noopener"
+            class="red1dev-link"
+            target="_blank"
+            title="View the source code on Github"
+            href="https://github.com/red1code/product-variations"
+          >
             Red1Dev
           </a>
         </strong>
@@ -54,8 +75,8 @@
     </footer>
 
     <script>
-      document.getElementById('year-holder').textContent = new Date().getFullYear();
+      document.getElementById('year-holder').textContent =
+        new Date().getFullYear();
     </script>
   </body>
-
 </html>

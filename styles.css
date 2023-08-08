@@ -19,7 +19,7 @@ header,
 footer {
   position: -webkit-sticky;
   position: sticky;
-  background-color: #E2D1F9;
+  background-color: #e2d1f9;
   padding: 16px;
   display: flex;
   justify-content: center;
@@ -31,12 +31,12 @@ header {
   top: 0;
 }
 
-header>div {
+header > div {
   text-align: center;
 }
 
 .intro {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 main {
@@ -44,7 +44,8 @@ main {
   padding: 24px;
 }
 
-form, .intro {
+form,
+.intro {
   padding: 16px;
   background-color: aliceblue;
   max-width: 750px;
@@ -63,7 +64,7 @@ footer styles
 }
 
 .footer-text {
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 .red1dev-link {
@@ -74,7 +75,7 @@ footer styles
 
 a.red1dev-link:hover {
   color: green;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .btns {
@@ -84,7 +85,7 @@ a.red1dev-link:hover {
 }
 
 button {
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: bold;
   border: none;
   padding: 11px 15px;
@@ -94,7 +95,7 @@ button {
 
 button:hover {
   filter: brightness(1.2);
-  transition: .3s;
+  transition: 0.3s;
 }
 
 button#downloadBtn {
@@ -105,7 +106,7 @@ button#downloadBtn {
 
 button#downloadBtn:disabled {
   filter: brightness(1);
-  opacity: .75;
+  opacity: 0.75;
   cursor: zoom-in;
 }
 
