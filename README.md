@@ -1,6 +1,5 @@
+Live preview [here](https://red1code.github.io/product-variations/)
+
 # Woocommerce Products Variations Generator
 
-Generate every possible variations from the attributes values of a product, and export them (variations) to a (.CSV) file, for Wordpress Woocommerce plugin.
-
-
-For live preview, click [here](https://red1code.github.io/product-variations/)
+Upload a CSV file containing [Woocommerce](https://woocommerce.com/) products variables, and the app will generate every possible compbinations of variations from the attributes values, and put them in a final CSV file, and then you can download that file.

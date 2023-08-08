@@ -1,5 +1,8 @@
 const csvFileInput = document.getElementById('csv-file-input');
 
+const downloadBtn = Btn('downloadBtn');
+downloadBtn.disable();
+// document.getElementById("downloadBtn").disabled = true;
 
 let ID = 1;
 let variationsRowsContainer = [
@@ -17,6 +20,7 @@ let variationsRowsContainer = [
     'Attribute 5 name', 'Attribute 5 value(s)', 'Attribute 5 visible', 'Attribute 5 global'
   ]
 ];
+
 
 // variationsRowsContainer.map(item => {
 //   let indx = item.indexOf('Parent');
@@ -36,8 +40,9 @@ csvFileInput.addEventListener('change', (event) => {
       const csvRows = variationsToRows(productVariations, attrs, csvData[i]);
       csvRows.map(row => {
         variationsRowsContainer.push(row);
-      })
+      });
     }
+    downloadBtn.enable()
   };
   reader.readAsText(file);
 });
@@ -143,9 +148,19 @@ function variationsToRows(variations, attributes, parentData) {
 
 function generateParentRow(attributes, rowData) {
   let parentRow = [
-    `${rowData['SKU']}`, 'variable', `${rowData['SKU']}`, `${rowData['Name']}`, '1', '0', 'visible',
-    `${rowData['Short description']}`, `${rowData['Description']}`, '', '', 'taxable', '', '1', '', '',
-    '0', '0', '', '', '', '', '1', '', '', '', `${rowData['Categories']}`, '', '', `${rowData['ImageLink']}`,
+    `${rowData['SKU']}`,
+    'variable',
+    `${rowData['SKU']}`,
+    `${rowData['Name']}`,
+    '1', '0', 'visible',
+    `${rowData['Short description']}`,
+    `${rowData['Description']}`,
+    '', '',
+    'taxable',
+    '', '1', '', '', '0', '0', '', '', '', '', '1', '', '', '',
+    `${rowData['Categories']}`,
+    '', '',
+    `${rowData['ImageLink']}`,
     '', '', '', '', '', '', '', '', ''
   ];
   const newCols = attributes.map(attr => [
@@ -166,7 +181,7 @@ function generateCsv(csvRows) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'products-variations.csv';
+  link.download = 'generated-products-variations.csv';
   link.click();
   // Clean up the URL object
   URL.revokeObjectURL(url);
@@ -184,7 +199,7 @@ helper functions
 
 
 function stringToArray(str) {
-  return str?.split('-').map(val => val.trim());
+  return str?.split('/').map(val => val.trim());
 }
 
 
@@ -203,4 +218,19 @@ function arrayToString(arr) {
 
 function getImgLink(link, color) {
   return link.replace('.jpg', `-${color}.jpg`);
+}
+
+
+function Btn(btnID) {
+  const btn = document.getElementById(btnID);
+  const enable = () => {
+    btn.disabled = false;
+  }
+  const disable = () => {
+    btn.disabled = true;
+  }
+  return {
+    enable,
+    disable
+  }
 }

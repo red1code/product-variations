@@ -4,9 +4,13 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   min-height: 100vh;
-  min-width: 350px;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
 }
@@ -15,7 +19,7 @@ header,
 footer {
   position: -webkit-sticky;
   position: sticky;
-  background-color: aliceblue;
+  background-color: #E2D1F9;
   padding: 16px;
   display: flex;
   justify-content: center;
@@ -31,16 +35,21 @@ header>div {
   text-align: center;
 }
 
+.intro {
+  font-size: .9rem;
+}
+
 main {
   flex: 1;
   padding: 24px;
 }
 
-form {
+form, .intro {
   padding: 16px;
   background-color: aliceblue;
   max-width: 750px;
   margin-inline: auto;
+  margin-bottom: 24px;
   border-radius: 5px;
   box-shadow: 0 0 5px 0;
 }
@@ -94,16 +103,13 @@ button#downloadBtn {
   color: #fff;
 }
 
+button#downloadBtn:disabled {
+  filter: brightness(1);
+  opacity: .75;
+  cursor: zoom-in;
+}
+
 button.reset {
   background-color: orangered;
   color: #fff;
 }
-
-/* 
-input {
-  width: 100%;
-  padding: 10px 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-*/

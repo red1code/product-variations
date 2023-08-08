@@ -14,14 +14,19 @@
   <body>
     <header>
       <div>
-        <h1>Woocommerce Products Variations Generator!</h1>
-        <small>
-          Generate every possible variations from the values of a product attributes, and export them to a (.CSV) file, for Wordpress Woocommerce.
-        </small>
+        <h1>Woocommerce Products Variations Generator</h1>
       </div>
     </header>
 
     <main>
+      <div class="intro">
+        Upload a CSV file containing 
+        <a href="https://woocommerce.com/" target="_blank">Woocommerce</a> 
+        products variables, and the app will generate every possible compbinations of variations from the attributes values, and put them in a final CSV file, and then you can download it. <br><br>
+        The input CSV file must be in a specific structure. Download the input sample from  
+        <strong><a href="./assets/variables-input-sample.csv">here</a></strong> (it contains 2 products as variables examples)
+      </div>
+
       <form onsubmit="downloadVariations()">
         <div class="upload-container">
           <label for="csv-input">Upload a CSV file: </label> <br><br>
