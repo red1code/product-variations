@@ -1,58 +1,59 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 a {
-  text-decoration: none;
+	text-decoration: none;
+	color: unset;
 }
 
 body {
-  min-height: 100vh;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
+	min-height: 100vh;
+	min-width: 300px;
+	display: flex;
+	flex-direction: column;
 }
 
 header,
 footer {
-  position: -webkit-sticky;
-  position: sticky;
-  background-color: #e2d1f9;
-  padding: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 5px 0 #ccc;
+	position: -webkit-sticky;
+	position: sticky;
+	background-color: #e2d1f9;
+	padding: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 0 5px 0 #ccc;
 }
 
 header {
-  top: 0;
+	top: 0;
 }
 
 header > div {
-  text-align: center;
+	text-align: center;
 }
 
 .intro {
-  font-size: 0.9rem;
+	font-size: 0.9rem;
 }
 
 main {
-  flex: 1;
-  padding: 24px;
+	flex: 1;
+	padding: 24px;
 }
 
 form,
 .intro {
-  padding: 16px;
-  background-color: aliceblue;
-  max-width: 750px;
-  margin-inline: auto;
-  margin-bottom: 24px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px 0;
+	padding: 16px;
+	background-color: aliceblue;
+	max-width: 750px;
+	margin-inline: auto;
+	margin-bottom: 24px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px 0;
 }
 
 /* 
@@ -60,57 +61,72 @@ footer styles
 */
 
 .love-emoji {
-  color: red;
+	color: red;
 }
 
 .footer-text {
-  font-size: 0.95rem;
+	font-size: 0.95rem;
 }
 
 .red1dev-link {
-  text-decoration: none;
-  color: inherit;
-  font-weight: bold;
+	text-decoration: none;
+	color: inherit;
+	font-weight: bold;
 }
 
 a.red1dev-link:hover {
-  color: green;
-  transition: 0.3s;
+	color: green;
+	transition: 0.3s;
 }
 
 .btns {
-  margin-top: 24px;
-  display: flex;
-  gap: 16px;
+	margin-top: 24px;
+	display: flex;
+	gap: 16px;
 }
 
 button {
-  font-size: 0.9rem;
-  font-weight: bold;
-  border: none;
-  padding: 11px 15px;
-  border-radius: 5px;
-  cursor: pointer;
+	font-size: 0.9rem;
+	font-weight: bold;
+	border: none;
+	padding: 11px 15px;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
 button:hover {
-  filter: brightness(1.2);
-  transition: 0.3s;
+	filter: brightness(1.2);
+	transition: 0.3s;
 }
 
 button#downloadBtn {
-  flex: 1;
-  background-color: green;
-  color: #fff;
+	flex: 1;
+	background-color: green;
+	color: #fff;
 }
 
 button#downloadBtn:disabled {
-  filter: brightness(1);
-  opacity: 0.75;
-  cursor: zoom-in;
+	filter: brightness(1);
+	opacity: 0.75;
+	cursor: zoom-in;
 }
 
 button.reset {
-  background-color: orangered;
-  color: #fff;
+	background-color: orangered;
+	color: #fff;
+}
+
+.sample-btn {
+	background-color: #1e87ff;
+	color: #fff;
+	padding: 6px 10px;
+}
+
+.woo-link {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.app-overview {
+	padding-bottom: 16px;
 }
