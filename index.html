@@ -3,10 +3,12 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description"
+			content="Generate every possible combination of variation for Woocommerce variable products">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
 		<link rel="stylesheet" href="styles.css" />
-		<script src="scripts.js" defer></script>
+		<script type="module" src="main.js"></script>
 		<title>Woocommerce Products Variations Generator</title>
 	</head>
 
@@ -22,28 +24,21 @@
 				<h2 class="app-overview">App overview</h2>
 				Upload a CSV file containing
 				<a href="https://woocommerce.com/" target="_blank" class="woo-link">Woocommerce</a>
-				products variables, and the app will generate every possible compbinations of variations
+				variables products, and the app will generate every possible compbinations of variations
 				from the attributes values, and put them in a final CSV file, and then you can download it.
 				<br /><br />
 				The input CSV file must be in a specific structure. Download
-				<strong>
-					<button class="sample-btn" title="Download">
-						<a href="./assets/variables-input-sample.csv">CSV Sample</a>
-					</button>
-				</strong>
+				<button class="sample-btn" title="Download">
+					<a href="./assets/variables-input-sample.csv">CSV Sample</a>
+				</button>
 				(it contains 2 products as variables examples)
 			</div>
 
-			<form onsubmit="downloadVariations()">
+			<form id="form">
 				<div class="upload-container">
 					<label for="csv-input">Upload a CSV file: </label> <br /><br />
-					<input
-						type="file"
-						id="csv-file-input"
-						accept=".csv"
-						name="csv-input"
-						placeholder="Upload a CSV file"
-						required />
+					<input type="file" id="csv-file-input" accept=".csv" name="csv-input"
+						placeholder="Upload a CSV file" required />
 				</div>
 				<div class="btns">
 					<button type="submit" id="downloadBtn">Download Variations</button>
@@ -52,24 +47,30 @@
 			</form>
 		</main>
 
+		<div id="alert">
+			<button id="closeAlert">Close</button>
+			<div id="alertContent"></div>
+		</div>
+
 		<footer>
 			<div class="footer-text">
-				© <span id="year-holder"></span>
+				©
 				<strong>
-					<a
-						rel="noopener"
-						class="red1dev-link"
-						target="_blank"
-						title="View the source code on Github"
-						href="https://github.com/red1code/product-variations">
-						Red1Dev
+					<a rel="noopener" id="red1devLink" target="_blank" title="Redouane Bekkouche's website"
+						href="https://red1code.github.io/red1dev/">
+						red1dev
 					</a>
 				</strong>
+				<span id="currentYear"></span> <b>|</b> Source code on
+				<a href="https://github.com/red1code/product-variations" rel="noopener" target="_blank"
+					id="githubRepoLink" title="Github repository of the app">
+					<img src="./assets/github.svg" alt="Github icon">
+				</a>
 			</div>
 		</footer>
 
 		<script>
-			document.getElementById('year-holder').textContent = new Date().getFullYear();
+			document.getElementById('currentYear').textContent = new Date().getFullYear();
 		</script>
 	</body>
 </html>

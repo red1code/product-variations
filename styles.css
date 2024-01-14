@@ -14,22 +14,16 @@ body {
 	min-width: 300px;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 
 header,
 footer {
-	position: -webkit-sticky;
-	position: sticky;
 	background-color: #e2d1f9;
 	padding: 16px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	box-shadow: 0 0 5px 0 #ccc;
-}
-
-header {
-	top: 0;
 }
 
 header > div {
@@ -56,32 +50,10 @@ form,
 	box-shadow: 0 0 5px 0;
 }
 
-/* 
-footer styles 
-*/
-
-.love-emoji {
-	color: red;
-}
-
-.footer-text {
-	font-size: 0.95rem;
-}
-
-.red1dev-link {
-	text-decoration: none;
-	color: inherit;
-	font-weight: bold;
-}
-
-a.red1dev-link:hover {
-	color: green;
-	transition: 0.3s;
-}
-
 .btns {
 	margin-top: 24px;
 	display: flex;
+	flex-wrap: wrap;
 	gap: 16px;
 }
 
@@ -92,6 +64,7 @@ button {
 	padding: 11px 15px;
 	border-radius: 5px;
 	cursor: pointer;
+	white-space: nowrap;
 }
 
 button:hover {
@@ -129,4 +102,62 @@ button.reset {
 
 .app-overview {
 	padding-bottom: 16px;
+}
+
+/* 
+footer styles 
+*/
+
+.footer-text {
+	font-size: 0.95rem;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+#red1devLink {
+	text-decoration: none;
+	color: inherit;
+	font-weight: bold;
+}
+
+#red1devLink:hover {
+	color: green;
+	transition: 0.3s;
+}
+
+#githubRepoLink {
+	height: 20px;
+	position: relative;
+	opacity: 0.75;
+}
+
+#githubRepoLink:hover {
+	opacity: 1;
+	transition: 0.3s;
+}
+
+#githubRepoLink img {
+	height: 100%;
+}
+
+/* 
+* alert
+*/
+
+#alert {
+	position: absolute;
+	display: none;
+	bottom: 72px;
+	left: 50%;
+	translate: -50%;
+	padding: 12px 16px;
+	border-radius: 4px;
+}
+
+#closeAlert {
+	all: unset;
+	cursor: pointer;
+	float: right;
+	font-weight: bold;
 }
